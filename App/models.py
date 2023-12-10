@@ -11,7 +11,7 @@ class Node(models.Model):
         'self', null=True, blank=True, on_delete=models.SET_NULL, related_name="next_node_of")
 
     def __str__(self):
-        return f"{self.Title}'s Node"
+        return f"{self.Title}"
 
     def delete(self, *args, **kwargs):
         super(Node, self).delete(*args, **kwargs)

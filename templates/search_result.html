@@ -9,23 +9,127 @@
         * {
             padding: 0;
             margin: 0;
+            font-family: sans-serif;
+        }
+
+        body {
+            background-color:#36b677 ;
+            
+        } 
+
+        /*nav bar styles  */
+        .d-flex {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .nav {
+            height: 50px;
+            padding: 0px 20px;
+            background-color: rgba(35,31,32,255);
+        }
+
+        .nav_ul {
+            width: 100%;
+        }
+
+        .nav_ul a {
+
+            text-decoration: none;
+            color: #fbab47;
+            font-size: 24px;
+        }
+
+        .nav_ul li {
+            list-style: none;
+        }
+
+        .search_field {
+            font-size: 20px;
+            border: 1px solid grey;
+            border-radius:20px;
+            padding: 5px 10px;
+        }
+
+        .search_button {
+            font-size: 20px;
+            border-radius: 20px;
+            padding: 5px 10px;
+            border: 2px solid #fbab47;
+            background-color: #fbab47;
+            color:white;
+        }
+
+        .search_button:hover {
+            box-shadow: 5px 5px 50px rgba(0, 0, 0, 0.3);
+        }
+
+
+        /* nav bar style end*/
+
+        .search_result_box>p {
+            color: #fbab47;
+        }
+
+        .search_result_box>h2 {
+            color: #fbab47;
+        }
+
+        h2{
+            color: #fbab47;
+        }
+        .card_title {
+            font-weight: 600;
+            font-size: 24px;
+        }
+
+        .author_name {
+            font-size: 14px;
+            font-weight: 600;
         }
     </style>
 </head>
 
 <body>
-    <div class="search_page_wrapper" style="height: 100vh;display:flex;justify-content:center;align-items:center;">
+    <div class="nav d-flex">
+        <ul class="nav_ul d-flex">
+            <li><a href="#">Home</a></li>
+            <div class="main_page_search_form">
+                <form class="d-flex" action="{% url 'search_node' %}" method="post">
+                    <!-- action = {% url 'search_node' %}  points to the view search_node in views.py-->
+                    {% csrf_token %}
+                    <input class="search_field" type="search" placeholder="Search a Title" name="search_parameter"
+                        id="">
+                    <input class="search_button" type="submit" name="" value="search" id="">
+                </form>
+            </div>
+        </ul>
+    </div>
+    <div class="search_page_wrapper"
+        style="height: 100vh;display:flex;justify-content:center;align-items:center;flex-direction:column;">
+        <h2>Search Result</h2>
         <div class="search_result_box"
-            style="height: 400px;width:600px;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:10px;border:1px solid grey;border-radius:5px;">
+            style="height: 300px;width:500px;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:10px;border:1px solid grey;border-radius:5px;background-color:rgba(35,31,32,255);">
             {% if search_result %}
-            <h2>Search Result</h2>
-            <p>Title: {{search_result.Title}}</p>
 
-            <p>Author : {{search_result.Author}}</p>
+            <h2 class="card_title">Title: {{search_result.Title}}</h2>
 
+            <p class="author_name">Author : {{search_result.Author}}</p>
+
+            <p>play button</p>
+
+            {% if search_result.next_node %}
             <p>next : {{search_result.next_node}}</p>
+            {% else %}
+            {% endif %}
 
+            {% if search_result.prev_node %}
             <p>previous: {{search_result.prev_node}}</p>
+            {% else %}
+            {% endif %}
+
             {% else %}
             <h2>Search result not found!</h2>
             {% endif %}
@@ -33,7 +137,7 @@
 
 
 
-        
+
     </div>
 
 </body>
