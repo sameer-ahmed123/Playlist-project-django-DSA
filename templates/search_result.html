@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>search result </title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="search_page_wrapper" style="height: 100vh;display:flex;justify-content:center;align-items:center;">
+        <div class="search_result_box"
+            style="height: 400px;width:600px;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:10px;border:1px solid grey;border-radius:5px;">
+            {% if search_result %}
+            <h2>Search Result</h2>
+            <p>Title: {{search_result.Title}}</p>
+
+            <p>Author : {{search_result.Author}}</p>
+
+            <p>next : {{search_result.next_node}}</p>
+
+            <p>previous: {{search_result.prev_node}}</p>
+            {% else %}
+            <h2>Search result not found!</h2>
+            {% endif %}
+        </div>
+
+
+
+        
+    </div>
+
+</body>
+
+</html>

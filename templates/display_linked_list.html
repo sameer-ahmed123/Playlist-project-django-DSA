@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Linked List</title>
+</head>
+
+<body>
+    <h1>Linked List</h1>
+    {% if nodes %}
+    <ul>
+        {% for node in nodes %}
+        <li>{{ node.Title }} by {{ node.Author }}</li>
+
+        <!-- Additional information about the node can be displayed here -->
+        {% endfor %}
+    </ul>
+    {% else %}
+    <p>No nodes in the linked list.</p>
+    {% endif %}
+
+
+    <h2>Add Node to Front</h2>
+    <form method="post" enctype="multipart/form-data" action="{% url 'add_node_to_front' %}">
+        {% csrf_token %}
+        <label for="title">Title:</label>
+        <input type="text" name="title" required><br>
+
+        <label for="author">Author:</label>
+        <input type="text" name="author" required><br>
+
+        <label for="music_file">Music File:</label>
+        <input type="file" name="music_file"><br>
+
+        <button type="submit">Add Node</button>
+    </form>
+    <br>
+    <a href="{% url 'delete_head' %}">Delete head</a>
+    <br>
+    <a href="{% url 'delete_tail' %}">Delete tail</a>
+    <br><br><br>
+
+    <h2>search a title</h2>
+    <form action="{% url 'search_node' %}" method="post">
+        <!-- action = {% url 'search_node' %}  points to the view search_node in views.py-->
+        {% csrf_token %}
+        <input type="search" name="search_parameter" id="">
+        <input type="submit" name="" value="search" id="">
+    </form>
+</body>
+
+</html>
