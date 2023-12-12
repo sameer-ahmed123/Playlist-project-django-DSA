@@ -4,6 +4,7 @@ from django.db import models
 class Node(models.Model):
     Title = models.CharField(max_length=350)
     Music_file = models.FileField(upload_to="Audio_files", null=True)
+    Title_Img = models.ImageField(upload_to="Images",null=True)
     Author = models.CharField(max_length=250, null=True, blank=True)
     next_node = models.OneToOneField(
         'self', null=True, blank=True, on_delete=models.SET_NULL, related_name='prev_node_of')
@@ -48,7 +49,7 @@ class LinkedList(models.Model):
         return nodes
 
     def add_node_to_head(self, Title, Music_file, Author):
-        new_node = Node(Title=Title, Music_file=Music_file, Author=Author)
+        new_node = Node(Title=Title, Music_file=Music_file, Author=Author,)
         if self.is_empty():
             self.head = new_node
             self.tail = new_node

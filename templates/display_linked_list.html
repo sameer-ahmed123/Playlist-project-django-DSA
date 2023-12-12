@@ -12,9 +12,9 @@
             font-family: sans-serif;
         }
 
-        body {
+        /* body {
             background-color: #36b677;
-        }
+        }*/
 
         .d-flex {
             display: flex;
@@ -30,7 +30,7 @@
         }
 
         .nav_ul {
-            width: 100%;
+            width: 100vw;
         }
 
         .nav_ul a {
@@ -55,13 +55,17 @@
             font-size: 20px;
             border-radius: 20px;
             padding: 5px 10px;
-            border: 2px solid #fbab47;
+            border: 2px solid rgb(251, 171, 71);
             background-color: #fbab47;
             color: white;
         }
 
         .search_button:hover {
-            box-shadow: 5px 5px 50px rgba(0, 0, 0, 0.3);
+            cursor: pointer;
+            background-color: white;
+            color: #000;
+            border: 2px solid gray;
+            box-shadow: 5px 5px 100px rgba(251, 171, 71, 0.6);
         }
 
         .main_page_wrapper {
@@ -71,6 +75,7 @@
             justify-content: flex-start;
             align-items: center;
             gap: 20px;
+
 
         }
 
@@ -82,10 +87,21 @@
             align-items: center;
 
             background-color: rgba(35, 31, 32, 255);
-            padding: 20px 25px;
+            padding: 20px 0px;
             width: 100%;
             color: #fbab47;
         }
+
+
+        /* forms container */
+        .addTO_forms_container {
+            display: flex;
+            height: 350px;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        /* forms container end  */
     </style>
 </head>
 
@@ -107,34 +123,56 @@
     <div class="main_page_wrapper">
         <div class="main_page_list_display">
             <h1>Linked List</h1>
-            <div style="height:100%; display: flex;justify-content:center;align-items:center;flex-direction:row; gap:25px">
+            <div
+                style="height:100%; display: flex;justify-content:center;align-items:center;flex-direction:row; gap:25px">
                 {% if nodes %}
-                
-                    {% for node in nodes %}
-                    <p>{{ node.Title }} by {{ node.Author }}</p>
-                    <!-- Additional information about the node can be displayed here -->
-                    {% endfor %}
-                
+
+                {% for node in nodes %}
+                <!-- https://uicookies.com/html-music-player/            check HTML Audio Player card for media player card-->
+                <img class="card_image" src="https://random.imagecdn.app/{{node.id}}/10">
+                <p>{{ node.Title }} by {{ node.Author }}</p>
+                <!-- Additional information about the node can be displayed here -->
+                {% endfor %}
+
                 {% else %}
                 <p>No nodes in the linked list.</p>
                 {% endif %}
+
             </div>
         </div>
 
+        <div class="addTO_forms_container">
+            <div class="main_page_toFront_form">
+                <h2>Add Node to Front</h2>
+                <form method="post" enctype="multipart/form-data" action="{% url 'add_node_to_front' %}">
+                    {% csrf_token %}
+                    <label for="title">Title:</label>
+                    <input type="text" name="title" required><br>
+                    <label for="author">Author:</label>
+                    <input type="text" name="author" required><br>
+                    <label for="music_file">Music File:</label>
+                    <input type="file" name="music_file"><br>
 
-        <div class="main_page_toFront_form">
-            <h2>Add Node to Front</h2>
-            <form method="post" enctype="multipart/form-data" action="{% url 'add_node_to_front' %}">
-                {% csrf_token %}
-                <label for="title">Title:</label>
-                <input type="text" name="title" required><br>
-                <label for="author">Author:</label>
-                <input type="text" name="author" required><br>
-                <label for="music_file">Music File:</label>
-                <input type="file" name="music_file"><br>
-                <button type="submit">Add Node</button>
-            </form>
+                    <button type="submit">Add Node</button>
+                </form>
+            </div>
+
+            <div class="main_page_toBack_form">
+                <h2>Add Node to tail</h2>
+                <form method="post" enctype="multipart/form-data" action="{% url 'add_node_to_tail' %}">
+                    {% csrf_token %}
+                    <label for="title">Title:</label>
+                    <input type="text" name="title_b" required><br>
+                    <label for="author">Author:</label>
+                    <input type="text" name="author_b" required><br>
+                    <label for="music_file">Music File:</label>
+                    <input type="file" name="music_file_b"><br>
+
+                    <button type="submit">Add Node</button>
+                </form>
+            </div>
         </div>
+
         <br>
         <a href="{% url 'delete_head' %}">Delete head</a>
         <br>
