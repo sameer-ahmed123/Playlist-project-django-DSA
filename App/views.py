@@ -24,6 +24,7 @@ def add_node_to_head(request):
         title = request.POST.get('title')
         music_file = request.FILES.get('music_file')
         author = request.POST.get('author')
+        
 
         linked_list = LinkedList.objects.first()
         if linked_list is None:
@@ -35,20 +36,22 @@ def add_node_to_head(request):
     return redirect('display_linked_list')
 
 
-# def add_node_to_tail(request):
-#     if request.method == 'POST':
-#         title = request.POST.get('title')
-#         music_file = request.FILES.get('music_file')
-#         author = request.POST.get('author')
+def add_node_to_tail(request):
+    if request.method == 'POST':
+        title = request.POST.get('title_b')
+        music_file = request.FILES.get('music_file_b')
+        author = request.POST.get('author_b')
+        print("tail title "+ title)
+       
 
-#         linked_list = LinkedList.objects.first()
-#         if linked_list is None:
-#             linked_list = LinkedList()
-#             linked_list.save()
-#         else:
-#             linked_list.add_node_to_tail(title, music_file, author)
+        linked_list = LinkedList.objects.first()
+        if linked_list is None:
+            linked_list = LinkedList()
+            linked_list.save()
+        else:
+            linked_list.add_node_to_tail(title, music_file, author)
 
-#     return redirect('display_linked_list')
+    return redirect('display_linked_list')
 
 
 def delete_head(self):
