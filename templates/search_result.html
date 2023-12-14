@@ -1,149 +1,110 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/a4fbd4b5ce.js" crossorigin="anonymous"></script>
+
     <title>search result </title>
-    <style>
-        * {
-            padding: 0;
-            margin: 0;
-            font-family: sans-serif;
-        }
-
-        body {
-            background-color: #36b677;
-
-        }
-
-        /*nav bar styles  */
-        .d-flex {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .nav {
-            height: 50px;
-            padding: 0px 20px;
-            background-color: rgba(35, 31, 32, 255);
-        }
-
-        .nav_ul {
-            width: 100%;
-        }
-
-        .nav_ul a {
-
-            text-decoration: none;
-            color: #fbab47;
-            font-size: 24px;
-        }
-
-        .nav_ul li {
-            list-style: none;
-        }
-
-        .search_field {
-            font-size: 20px;
-            border: 1px solid grey;
-            border-radius: 20px;
-            padding: 5px 10px;
-        }
-
-        .search_button {
-            font-size: 20px;
-            border-radius: 20px;
-            padding: 5px 10px;
-            border: 2px solid rgb(251, 171, 71);
-            background-color: #fbab47;
-            color: white;
-        }
-
-        .search_button:hover {
-            cursor: pointer;
-            background-color: white;
-            color: #000;
-            border: 2px solid gray;
-            box-shadow: 5px 5px 100px rgba(251, 171, 71, 0.6);
-        }
+    <link rel="stylesheet" href="{% static 'css/nav.css' %}">
+    <link rel="stylesheet" href="{% static 'css/search_page.css' %}">
+    <link rel="stylesheet" href="{% static 'css/music_card.css' %}">
 
 
-        /* nav bar style end*/
 
-        .search_result_box>p {
-            color: #fbab47;
-        }
-
-        .search_result_box>h2 {
-            color: #fbab47;
-        }
-
-        h2 {
-            color: #fbab47;
-        }
-
-        .card_title {
-            font-weight: 600;
-            font-size: 24px;
-        }
-
-        .author_name {
-            font-size: 14px;
-            font-weight: 600;
-        }
-    </style>
 </head>
 
 <body>
-    <div class="nav d-flex">
-        <ul class="nav_ul d-flex">
-            <li><a href="#">Home</a></li>
-            <div class="main_page_search_form">
-                <form class="d-flex" action="{% url 'search_node' %}" method="post">
-                    <!-- action = {% url 'search_node' %}  points to the view search_node in views.py-->
-                    {% csrf_token %}
-                    <input class="search_field" type="search" placeholder="Search a Title" name="search_parameter"
-                        id="">
-                    <input class="search_button" type="submit" name="" value="search" id="">
-                </form>
-            </div>
-        </ul>
-    </div>
-    <div class="search_page_wrapper"
-        style="height: 100vh;display:flex;justify-content:center;align-items:center;flex-direction:column;">
-        <h2>Search Result</h2>
-        <div class="search_result_box"
-            style="height: 300px;width:500px;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:10px;border:1px solid grey;border-radius:5px;background-color:rgba(35,31,32,255);">
-            {% if search_result %}
-
-            <h2 class="card_title">Title: {{search_result.Title}}</h2>
-
-            <p class="author_name">Author : {{search_result.Author}}</p>
-
-            <p>play button</p>
-
-            {% if search_result.next_node %}
-            <p>next : {{search_result.next_node}}</p>
-            {% else %}
-            {% endif %}
-
-            {% if search_result.prev_node %}
-            <p>previous: {{search_result.prev_node}}</p>
-            {% else %}
-            {% endif %}
-
-            {% else %}
-            <h2>Search result not found!</h2>
-            {% endif %}
+    <div style="height: 100vh;">
+        <div class="nav d-flex">
+            <ul class="nav_ul d-flex">
+                <li><a href="{% url 'display_linked_list' %}">Home</a></li>
+                <div class="main_page_search_form">
+                    <form class="d-flex" action="{% url 'search_node' %}" method="post">
+                        <!-- action = {% url 'search_node' %}  points to the view search_node in views.py-->
+                        {% csrf_token %}
+                        <input class="search_field" type="search" placeholder="Search a Title" name="search_parameter"
+                            id="">
+                        <input class="search_button" type="submit" name="" value="search" id="">
+                    </form>
+                </div>
+            </ul>
         </div>
+        <div class="search_page_wrapper">
+            <h2>Search Result</h2>
+            <div class="search_result_box">
+                {% if search_result %}
+                <div class="music_card">
+                    <div class="title_img">
+                        <!-- https://uicookies.com/html-music-player/            check HTML Audio Player card for media player card-->
+                        <img class="card_image"
+                            src="https://source.unsplash.com/random/200x200?sig={{search_result.id}}">
+                    </div>
+                    <div class="Node_info_box">
+                        <div>
+                            <h2>{{ search_result.Title }} </h2>
+                            <small>{{ search_result.Author }}</small>
+                            <audio style="display: none;" controls id="audio_file"
+                                src="{{search_result.Music_file.url}}"></audio>
+                        </div>
+                        <div class="play_options">
+                            {% if search_result.prev_node %}
+                            <div class="prev">
+                                <!-- <p>previous: {{search_result.prev_node}}</p> -->
+                                <i class="fa-solid fa-backward"></i>
+                            </div>
+                            {% else %}
+                            {% endif %}
+                            <i onclick="togglePlay()" id="play_btn" class="fa-solid fa-play"
+                                style="font-size: 16px;"></i>
+                            {% if search_result.next_node %}
+                            <div class="next">
+                                <!-- <p>next : {{search_result.next_node}}</p> -->
+                                <i class="fa-solid fa-forward"></i>
+                            </div>
+                            {% else %}
+                            {% endif %}
+                        </div>
 
-
-
-
+                    </div>
+                </div>
+                {% else %}
+                <h2>Search result not found!</h2>
+                {% endif %}
+            </div>
+        </div>
     </div>
+
+
+    <script>
+        var myAudio = document.getElementById("audio_file");
+        var isPlaying = false;
+
+        let play_btn = document.getElementById("play_btn")
+
+        function togglePlay() {
+            isPlaying ? myAudio.pause() : myAudio.play();
+        };
+
+        myAudio.onplaying = function () {
+            isPlaying = true;
+            play_btn.classList.remove("fa-play")
+            play_btn.classList.add("fa-pause")
+        };
+        myAudio.onpause = function () {
+            isPlaying = false;
+            play_btn.classList.remove("fa-pause")
+            play_btn.classList.add("fa-play")
+        };
+
+
+
+
+
+    </script>
+
 
 </body>
 

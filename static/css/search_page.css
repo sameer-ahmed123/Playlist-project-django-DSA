@@ -1,0 +1,56 @@
+* {
+  padding: 0;
+  margin: 0;
+  font-family: sans-serif;
+}
+
+body {
+  background-color: #36b677;
+}
+
+.search_page_wrapper {
+  height: 90%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.search_result_box {
+  height: 300px;
+  width: 500px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  border: 1px solid grey;
+  border-radius: 10px;
+  background-color: rgba(35, 31, 32, 255);
+}
+
+.search_result_box > p {
+  color: #fbab47;
+}
+
+.search_result_box > h2 {
+  color: #fbab47;
+}
+
+h2 {
+  color: #fbab47;
+}
+
+.card_title {
+  font-weight: 600;
+  font-size: 24px;
+}
+
+.author_name {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+i:hover {
+  cursor: pointer;
+  transform: scale(1.2);
+}

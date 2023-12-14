@@ -1,0 +1,82 @@
+* {
+  padding: 0;
+  margin: 0;
+  font-family: sans-serif;
+}
+
+/* body {
+    background-color: #36b677;
+}*/
+
+.main_page_wrapper {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 20px;
+}
+
+.main_page_list_display {
+  height: 800px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+
+  background-color: rgba(35, 31, 32, 255);
+  padding: 20px 0px;
+  width: 100%;
+}
+.main_page_list_display > h1 {
+  color: #fbab47;
+}
+
+/* carusul */
+.main_page_list_display_carusol {
+  padding: 0px 30px;
+  height: 100%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: row;
+  gap: 25px;
+  width: 1200px;
+  overflow-y: auto;
+}
+
+/* .main_page_list_display_carusol::-webkit-scrollbar {
+  display: none;
+} */
+
+/* width */
+.main_page_list_display_carusol::-webkit-scrollbar {
+  height: 3px;
+}
+
+/* Track */
+.main_page_list_display_carusol::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+.main_page_list_display_carusol::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+/* Handle on hover */
+.main_page_list_display_carusol::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+/* carosul end */
+
+/* forms container */
+.addTO_forms_container {
+  display: flex;
+  height: 350px;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* forms container end  */

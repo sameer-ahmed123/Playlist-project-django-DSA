@@ -7,7 +7,6 @@ urlpatterns = [
     path('add_tail/', add_node_to_tail, name='add_node_to_tail'),
     path("delete_head/", delete_head, name="delete_head"),
     path("delete_tail", delete_tail, name="delete_tail"),
-    path("search_node", search_node, name="search_node"),
-
+    path("search_node/", search_node, name="search_node"),
 
 ]

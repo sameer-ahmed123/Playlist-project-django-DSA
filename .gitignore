@@ -1,4 +1,5 @@
 venv/
 Audio_files/
 media/
-/.sqlite3
+.sqlite3
+/assets

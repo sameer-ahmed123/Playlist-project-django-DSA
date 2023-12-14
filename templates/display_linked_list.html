@@ -1,114 +1,22 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/a4fbd4b5ce.js" crossorigin="anonymous"></script>
     <title>Linked List</title>
-    <style>
-        * {
-            padding: 0;
-            margin: 0;
-            font-family: sans-serif;
-        }
+    <link rel="stylesheet" href="{% static 'css/nav.css' %}">
+    <link rel="stylesheet" href="{% static 'css/main_page.css' %}">
+    <link rel="stylesheet" href="{% static 'css/music_card.css' %}">
 
-        /* body {
-            background-color: #36b677;
-        }*/
-
-        .d-flex {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .nav {
-            height: 50px;
-            padding: 0px 20px;
-            background-color: rgba(35, 31, 32, 255);
-        }
-
-        .nav_ul {
-            width: 100vw;
-        }
-
-        .nav_ul a {
-
-            text-decoration: none;
-            color: #fbab47;
-            font-size: 24px;
-        }
-
-        .nav_ul li {
-            list-style: none;
-        }
-
-        .search_field {
-            font-size: 20px;
-            border: 1px solid grey;
-            border-radius: 20px;
-            padding: 5px 10px;
-        }
-
-        .search_button {
-            font-size: 20px;
-            border-radius: 20px;
-            padding: 5px 10px;
-            border: 2px solid rgb(251, 171, 71);
-            background-color: #fbab47;
-            color: white;
-        }
-
-        .search_button:hover {
-            cursor: pointer;
-            background-color: white;
-            color: #000;
-            border: 2px solid gray;
-            box-shadow: 5px 5px 100px rgba(251, 171, 71, 0.6);
-        }
-
-        .main_page_wrapper {
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-start;
-            align-items: center;
-            gap: 20px;
-
-
-        }
-
-        .main_page_list_display {
-            height: 350px;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            align-items: center;
-
-            background-color: rgba(35, 31, 32, 255);
-            padding: 20px 0px;
-            width: 100%;
-            color: #fbab47;
-        }
-
-
-        /* forms container */
-        .addTO_forms_container {
-            display: flex;
-            height: 350px;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        /* forms container end  */
-    </style>
 </head>
 
 <body>
     <div class="nav d-flex">
         <ul class="nav_ul d-flex">
-            <li><a href="#">Home</a></li>
+            <li><a href="{% url 'display_linked_list' %}">Home</a></li>
             <div class="main_page_search_form">
                 <form class="d-flex" action="{% url 'search_node' %}" method="post">
                     <!-- action = {% url 'search_node' %}  points to the view search_node in views.py-->
@@ -123,17 +31,28 @@
     <div class="main_page_wrapper">
         <div class="main_page_list_display">
             <h1>Linked List</h1>
-            <div
-                style="height:100%; display: flex;justify-content:center;align-items:center;flex-direction:row; gap:25px">
+            <div class="main_page_list_display_carusol">
                 {% if nodes %}
-
                 {% for node in nodes %}
-                <!-- https://uicookies.com/html-music-player/            check HTML Audio Player card for media player card-->
-                <img class="card_image" src="https://random.imagecdn.app/{{node.id}}/10">
-                <p>{{ node.Title }} by {{ node.Author }}</p>
-                <!-- Additional information about the node can be displayed here -->
-                {% endfor %}
+                <div class="music_card">
+                    <div class="title_img">
+                        <!-- https://uicookies.com/html-music-player/            check HTML Audio Player card for media player card-->
+                        <img class="card_image" src="https://source.unsplash.com/random/200x200?sig={{node.id}}">
 
+                    </div>
+                    <div class="Node_info_box">
+                        <div>
+                            <h2>{{ node.Title }} </h2>
+                            <small>{{ node.Author }}</small>
+                        </div>
+
+                        <i class="fa-solid fa-play" style="font-size: 32px;"></i>
+                    </div>
+
+
+
+                </div>
+                {% endfor %}
                 {% else %}
                 <p>No nodes in the linked list.</p>
                 {% endif %}

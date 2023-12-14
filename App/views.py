@@ -24,7 +24,6 @@ def add_node_to_head(request):
         title = request.POST.get('title')
         music_file = request.FILES.get('music_file')
         author = request.POST.get('author')
-        
 
         linked_list = LinkedList.objects.first()
         if linked_list is None:
@@ -41,8 +40,7 @@ def add_node_to_tail(request):
         title = request.POST.get('title_b')
         music_file = request.FILES.get('music_file_b')
         author = request.POST.get('author_b')
-        print("tail title "+ title)
-       
+        print("tail title " + title)
 
         linked_list = LinkedList.objects.first()
         if linked_list is None:
@@ -60,11 +58,11 @@ def delete_head(self):
     if linked_list is None:
         linked_list = LinkedList()
         linked_list.save()
-    
+
     linked_list.delete_head()
 
     return redirect("display_linked_list")
-   
+
 
 def delete_tail(self):
     linked_list = LinkedList.objects.first()
@@ -72,14 +70,14 @@ def delete_tail(self):
     if linked_list is None:
         linked_list = LinkedList()
         linked_list.save()
-    
+
     linked_list.delete_tail()
 
     return redirect("display_linked_list")
 
 
-def search_node(request, ):
-    if(request.method == "POST"):
+def search_node(request):
+    if (request.method == "POST"):
         search_item = request.POST.get("search_parameter")
 
         linked_list = LinkedList.objects.first()
@@ -88,5 +86,4 @@ def search_node(request, ):
             linked_list.save()
         search_result = linked_list.search_node(search_item)
 
-    
-    return render(request, "search_result.html", {"search_result":search_result})
+    return render(request, "search_result.html", {"search_result": search_result})
