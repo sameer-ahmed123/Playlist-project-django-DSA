@@ -16,7 +16,7 @@
 <body>
     <div class="nav d-flex">
         <ul class="nav_ul d-flex">
-            <li><a href="{% url 'display_linked_list' %}">Home</a></li>
+            <li><a class="nav_home" href="{% url 'display_linked_list' %}">Home</a></li>
             <div class="main_page_search_form">
                 <form class="d-flex" action="{% url 'search_node' %}" method="post">
                     <!-- action = {% url 'search_node' %}  points to the view search_node in views.py-->

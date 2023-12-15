@@ -20,7 +20,7 @@
     <div style="height: 100vh;">
         <div class="nav d-flex">
             <ul class="nav_ul d-flex">
-                <li><a href="{% url 'display_linked_list' %}">Home</a></li>
+                <li><a class="nav_home" href="{% url 'display_linked_list' %}">Home</a></li>
                 <div class="main_page_search_form">
                     <form class="d-flex" action="{% url 'search_node' %}" method="post">
                         <!-- action = {% url 'search_node' %}  points to the view search_node in views.py-->
@@ -36,7 +36,7 @@
             <h2>Search Result</h2>
             <div class="search_result_box">
                 {% if search_result %}
-                <div class="music_card">
+                <div class="detail_card">
                     <div class="title_img">
                         <!-- https://uicookies.com/html-music-player/            check HTML Audio Player card for media player card-->
                         <img class="card_image"
