@@ -14,16 +14,15 @@
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  gap: 20px;
 }
 
 .main_page_list_display {
-  height: 800px;
+  height: 700px;
+
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-
   background-color: rgba(35, 31, 32, 255);
   padding: 20px 0px;
   width: 100%;
@@ -35,19 +34,18 @@
 /* carusul */
 .main_page_list_display_carusol {
   padding: 0px 30px;
-  height: 100%;
+  height: 500px;
   display: flex;
   justify-content: flex-start;
   align-items: center;
   flex-direction: row;
-  gap: 25px;
-  width: 1200px;
+  gap: 60px;
+  width: 90vw;
   overflow-y: auto;
+  transition: ease 350ms;
 }
 
-/* .main_page_list_display_carusol::-webkit-scrollbar {
-  display: none;
-} */
+
 
 /* width */
 .main_page_list_display_carusol::-webkit-scrollbar {
@@ -73,10 +71,66 @@
 
 /* forms container */
 .addTO_forms_container {
+  box-sizing: border-box;
   display: flex;
-  height: 350px;
+  height: 400px;
+  width: 100%;
   justify-content: space-between;
+  align-items: center;
+  background-color: rgba(35, 31, 32, 255);
+  color: white;
+  padding: 20px 40px;
+}
+
+.form_wrapper {
+  padding: 10px 40px;
+  height: 400px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   align-items: center;
 }
 
 /* forms container end  */
+/* ************************************************************************************************** */
+/* delete options styling */
+
+.delete_options_wrapper {
+  width: 100%;
+  height: 100px;
+  background-color: rgba(35, 31, 32, 255);
+}
+
+.options_container {
+  box-sizing: border-box;
+  padding: 10px 100px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.delete_btn {
+  text-align: center;
+  height: 15px;
+  width: 160px;
+  text-decoration: none;
+  color: #fdf0f1;
+  font-size: 16px;
+  border-radius: 4px;
+  background-color: #ed5e68;
+  padding: 10px;
+}
+
+.delete_node_btn:hover {
+  cursor: pointer;
+  transform: scale(1.05);
+}
+
+/* delete option styling end  */
