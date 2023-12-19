@@ -34,24 +34,23 @@
             <div id="display_carousel" class="main_page_list_display_carusol">
                 {% if nodes %}
                 {% for node in nodes %}
-                <div class="music_card">
-                    <div class="title_img">
-                        <!-- https://uicookies.com/html-music-player/            check HTML Audio Player card for media player card-->
-                        <img class="card_image" src="https://source.unsplash.com/random/200x200?sig={{node.id}}">
+                <a style="text-decoration: none;" href="{% url 'view_node' node.id %}">
+                    <div class="music_card">
+                        <div class="title_img">
+                            <!-- https://uicookies.com/html-music-player/            check HTML Audio Player card for media player card-->
+                            <img class="card_image" src="https://source.unsplash.com/random/200x200?sig={{node.id}}">
 
-                    </div>
-                    <div class="Node_info_box">
-                        <div>
-                            <h2>{{ node.Title }} </h2>
-                            <small>{{ node.Author }}</small>
                         </div>
+                        <div class="Node_info_box">
+                            <div>
+                                <h2>{{ node.Title }} </h2>
+                                <small>{{ node.Author }}</small>
+                            </div>
 
-                        <i class="fa-solid fa-play" style="font-size: 32px;"></i>
+                            <i class="fa-solid fa-play" style="font-size: 32px;"></i>
+                        </div>
                     </div>
-
-
-
-                </div>
+                </a>
                 {% endfor %}
                 {% else %}
                 <p>No nodes in the linked list.</p>
@@ -107,7 +106,7 @@
     </div>
 
 
-   
+
 
 </body>
 

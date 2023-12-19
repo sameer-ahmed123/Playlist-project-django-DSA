@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://kit.fontawesome.com/a4fbd4b5ce.js" crossorigin="anonymous"></script>
 
-    <title>search result </title>
+    <title>node display</title>
     <link rel="stylesheet" href="{% static 'css/nav.css' %}">
     <link rel="stylesheet" href="{% static 'css/search_page.css' %}">
     <link rel="stylesheet" href="{% static 'css/music_card.css' %}">
@@ -33,28 +33,26 @@
             </ul>
         </div>
         <div class="search_page_wrapper">
-            <h2>Search Result</h2>
+
             <div class="search_result_box">
-                {% if search_result %}
+                {% if node %}
                 <div class="detail_card">
                     <div class="title_img">
                         <!-- https://uicookies.com/html-music-player/            check HTML Audio Player card for media player card-->
-                        <img class="card_image"
-                            src="https://source.unsplash.com/random/200x200?sig={{search_result.id}}">
+                        <img class="card_image" src="https://source.unsplash.com/random/200x200?sig={{node.id}}">
                     </div>
                     <div class="Node_info_box">
                         <div>
-                            <h2>{{ search_result.Title }} </h2>
-                            <small>{{ search_result.Author }}</small>
+                            <h2>{{ node.Title }} </h2>
+                            <small>{{ node.Author }}</small>
                             <audio style="display: none;" controls id="audio_file"
-                                src="{{search_result.Music_file.url}}"></audio>
+                                src="{{node.Music_file.url}}"></audio>
                         </div>
                         <div class="play_options">
-                            {% if search_result.prev_node %}
+                            {% if node.prev_node %}
                             <div class="prev">
-                                <a href="{% url 'view_node' search_result.prev_node.id %}"
-                                style="text-decoration: none;color:white;">
-                                    <!-- <p>previous: {{search_result.prev_node}}</p> -->
+                                <a style="text-decoration: none;color:white;" href="{% url 'view_node' node.prev_node.id %}">
+                                    <!-- <p>previous: {{node.prev_node}}</p> -->
                                     <i class="fa-solid fa-backward"></i>
                                 </a>
                             </div>
@@ -62,11 +60,10 @@
                             {% endif %}
                             <i onclick="togglePlay()" id="play_btn" class="fa-solid fa-play"
                                 style="font-size: 16px;"></i>
-                            {% if search_result.next_node %}
+                            {% if node.next_node %}
                             <div class="next">
-                                <a href="{% url 'view_node' search_result.next_node.id %}"
-                                    style="text-decoration: none;color:white;">
-                                    <!-- <p>next : {{search_result.next_node}}</p> -->
+                                <a style="text-decoration: none;color:white;" href="{% url 'view_node' node.next_node.id %}">
+                                    <!-- <p>next : {{node.next_node}}</p> -->
                                     <i class="fa-solid fa-forward"></i>
                                 </a>
                             </div>

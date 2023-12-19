@@ -1,5 +1,5 @@
-from .models import LinkedList
-from django.shortcuts import render, redirect
+from .models import LinkedList, Node
+from django.shortcuts import get_object_or_404, render, redirect
 from django.shortcuts import render
 
 # Create your views here.
@@ -87,3 +87,12 @@ def search_node(request):
         search_result = linked_list.search_node(search_item)
 
     return render(request, "search_result.html", {"search_result": search_result})
+
+
+def view_node(request, id):
+    node = get_object_or_404(Node, id=id)
+
+    context = {
+        "node": node
+    }
+    return render(request, "node_detail.html", context)
