@@ -1,3 +1,4 @@
+import os
 from django.db import models
 
 
@@ -14,6 +15,11 @@ class Node(models.Model):
         return f"{self.Title}"
 
     def delete(self, *args, **kwargs):
+        if self.Music_file:
+            path = self.Music_file.path
+            os.remove(path)
+            # to remove the music file from the device
+
         super(Node, self).delete(*args, **kwargs)
 
 
