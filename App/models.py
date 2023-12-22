@@ -9,7 +9,7 @@ class Node(models.Model):
     next_node = models.OneToOneField(
         'self', null=True, blank=True, on_delete=models.SET_NULL, related_name='prev_node_of')
     prev_node = models.OneToOneField(
-        'self', null=True, blank=True, on_delete=models.SET_NULL, related_name="next_node_of")
+        'self', null=True, blank=True, on_delete=models.SET_NULL, related_name="next_node_of", unique=False)
 
     def __str__(self):
         return f"{self.Title}"
@@ -134,3 +134,64 @@ class LinkedList(models.Model):
                 if (current_node.Title == search_target):
                     return current_node
                 current_node = current_node.next_node
+
+    def add_to_nth(self, Title, Music_file, Author, position):
+        new_node = Node(Title=Title, Music_file=Music_file, Author=Author)
+        if new_node.Music_file:
+            print(new_node.Music_file.path + "music path new node")
+
+        if self.is_empty():
+            self.head = new_node
+            self.tail = new_node
+            new_node.save()
+            self.save()
+            return
+
+        if position == 1:
+            self.add_node_to_head(Title, Music_file, Author)
+            return
+
+        current_position = 1
+        current_node = self.head
+
+        while current_node and current_position < position - 1:
+            current_node = current_node.next_node
+            current_position += 1
+
+        if current_node.next_node is None:
+            self.add_node_to_tail(Title, Music_file, Author)
+            return
+
+        # Check if adding new_node would violate the unique constraint
+        if current_node.next_node and current_node.next_node.prev_node == current_node:
+            # Handle the conflict by updating existing nodes
+            print(current_node.Title)
+            curents_nextNode = current_node.next_node
+            new_node.save()
+
+            curents_nextNode.prev_node = new_node
+            new_node.next_node = curents_nextNode
+            current_node.next_node.save()
+
+            current_node.next_node = new_node
+            current_node.save()
+
+            new_node.prev_node = current_node
+
+            # Save the changes to the existing nodes and the new node
+            current_node.next_node.save()
+
+            new_node.prev_node.save()  # Save the related object before saving the main object
+        else:
+
+            new_node.next_node = current_node.next_node
+            current_node.next_node.prev_node = new_node
+            current_node.next_node = new_node
+
+            # Save the changes to the existing nodes and the new node
+            new_node.prev_node.save()  #
+            new_node.save()
+            current_node.save()
+
+        new_node.save()
+        self.save()

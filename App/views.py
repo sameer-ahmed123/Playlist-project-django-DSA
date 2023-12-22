@@ -52,7 +52,7 @@ def add_node_to_tail(request):
     return redirect('display_linked_list')
 
 
-def delete_head(self):
+def delete_head(request):
     linked_list = LinkedList.objects.first()
 
     if linked_list is None:
@@ -64,7 +64,7 @@ def delete_head(self):
     return redirect("display_linked_list")
 
 
-def delete_tail(self):
+def delete_tail(request):
     linked_list = LinkedList.objects.first()
 
     if linked_list is None:
@@ -96,3 +96,24 @@ def view_node(request, id):
         "node": node
     }
     return render(request, "node_detail.html", context)
+
+
+def add_to_nth(request):
+    if request.method == "POST":
+        Title = request.POST.get("nth_title")
+        Music_file = request.FILES.get("nth_music_file")
+        Author = request.POST.get("nth_author")
+        position = int(request.POST.get("nth_pos"))
+
+        linked_list = LinkedList.objects.first()
+        if linked_list is None:
+            linked_list = LinkedList()
+            linked_list.save()
+
+        linked_list.add_to_nth(Title, Music_file, Author, position)
+
+    return redirect("display_linked_list")
+
+
+def delete_nth():
+    return redirect("display_linked_list")

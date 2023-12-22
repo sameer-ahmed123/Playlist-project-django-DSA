@@ -8,7 +8,8 @@ urlpatterns = [
     path("delete_head/", delete_head, name="delete_head"),
     path("delete_tail", delete_tail, name="delete_tail"),
     path("search_node/", search_node, name="search_node"),
-    path("Node/<int:id>/",view_node, name="view_node"),
+    path("Node/<int:id>/", view_node, name="view_node"),
+    path("add_to_nth", add_to_nth, name="add_to_nth"),
 
     # {% url 'view_node' search_result.id %}
 
