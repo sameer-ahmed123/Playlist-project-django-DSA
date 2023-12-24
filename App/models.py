@@ -137,8 +137,6 @@ class LinkedList(models.Model):
 
     def add_to_nth(self, Title, Music_file, Author, position):
         new_node = Node(Title=Title, Music_file=Music_file, Author=Author)
-        if new_node.Music_file:
-            print(new_node.Music_file.path + "music path new node")
 
         if self.is_empty():
             self.head = new_node
@@ -153,11 +151,17 @@ class LinkedList(models.Model):
 
         current_position = 1
         current_node = self.head
-
-        while current_node and current_position < position - 1:
+        # find the current node and then add the new node accoding to current node
+        while current_node and (current_position < position - 1):
             current_node = current_node.next_node
             current_position += 1
 
+        # agar position list size se greater hai toh add to tail
+        if (position-1 > current_position):
+            self.add_node_to_tail(Title, Music_file, Author)
+            return
+
+        #  agar current node khud tail hai toh ==> add to tail new_node
         if current_node.next_node is None:
             self.add_node_to_tail(Title, Music_file, Author)
             return
@@ -165,32 +169,20 @@ class LinkedList(models.Model):
         # Check if adding new_node would violate the unique constraint
         if current_node.next_node and current_node.next_node.prev_node == current_node:
             # Handle the conflict by updating existing nodes
-            print(current_node.Title)
             curents_nextNode = current_node.next_node
+            # new node database me exist kare ga toh changes apply ho gi....
             new_node.save()
 
             curents_nextNode.prev_node = new_node
             new_node.next_node = curents_nextNode
-            current_node.next_node.save()
+            curents_nextNode.save()  # this node comes after the new_node
 
             current_node.next_node = new_node
-            current_node.save()
+            current_node.save()  # save current node after applying changes
+            # / yeh node new_node se pehle aata
 
             new_node.prev_node = current_node
-
-            # Save the changes to the existing nodes and the new node
-            current_node.next_node.save()
-
-            new_node.prev_node.save()  # Save the related object before saving the main object
-        else:
-
-            new_node.next_node = current_node.next_node
-            current_node.next_node.prev_node = new_node
-            current_node.next_node = new_node
-
-            # Save the changes to the existing nodes and the new node
-            new_node.prev_node.save()  #
-            new_node.save()
+            new_node.save()  # at this time next of current node is the "NEW_NODE"
             current_node.save()
 
         new_node.save()
