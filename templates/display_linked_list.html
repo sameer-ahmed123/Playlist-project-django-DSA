@@ -113,10 +113,10 @@
                             class="fa-solid fa-arrow-left"></i></span>
                     Delete head </a>
 
-                <form method="post" action="{% url 'delete_nth' %}" class="delete_nth">
+                <form method="post" action="{% url 'delete_nth' %}" class="delete_nth_form">
                     {% csrf_token %}
                     <input type="text" name="delete_nth_pos">
-                    <input type="submit" value="delete nth node">
+                    <input class="delete_nth_btn" type="submit" value="delete nth node">
                 </form>
 
                 <a class="delete_btn" href="{% url 'delete_tail' %}">Delete tail <span><i
