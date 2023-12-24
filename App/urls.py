@@ -10,6 +10,7 @@ urlpatterns = [
     path("search_node/", search_node, name="search_node"),
     path("Node/<int:id>/", view_node, name="view_node"),
     path("add_to_nth", add_to_nth, name="add_to_nth"),
+    path('delete_nth', delete_nth, name="delete_nth"),
 
     # {% url 'view_node' search_result.id %}
 

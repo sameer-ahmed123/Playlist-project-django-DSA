@@ -115,5 +115,16 @@ def add_to_nth(request):
     return redirect("display_linked_list")
 
 
-def delete_nth():
+def delete_nth(request):
+    if (request.method == "POST"):
+        position = int(request.POST.get("delete_nth_pos"))
+        # print("delete postiotion is :" + str(position))
+
+        linkedlist = LinkedList.objects.first()
+        if linkedlist is None:
+            linkedlist = LinkedList()
+            linkedlist.save()
+
+        linkedlist.delete_nth(position)
+
     return redirect("display_linked_list")

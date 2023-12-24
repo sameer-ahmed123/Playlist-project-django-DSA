@@ -76,13 +76,12 @@ class LinkedList(models.Model):
             self.tail = new_node
             new_node.save()
             self.head.save()
+
         else:
             # assign the next of current tail to the  "new_node"
             self.tail.next_node = new_node
-
             # assign the previous node of "new_node" to the current tail
             new_node.prev_node = self.tail
-
             new_node.save()
             self.tail.save()
             self.tail = new_node  # move the "Tail" to the newly added node
@@ -186,4 +185,52 @@ class LinkedList(models.Model):
             current_node.save()
 
         new_node.save()
+        self.save()
+
+    def delete_nth(self, position):
+        if (self.is_empty()):
+            print("Linked list is empty!!")
+        else:
+            print(str(position) + "the posittion in teermial")
+            if (position == 1):
+                # delete the head if user wants to delete the first position node
+                self.delete_head()
+                return
+
+            current_position = 1
+            current_node = self.head
+
+            while current_node and (current_position < position-1):
+                current_node = current_node.next_node
+                current_position += 1
+
+            if (position - 1 > current_position):
+                # delete tail if user wants to delete nth_item that is at a position greater then the size of linked list
+                # print("deleted tail / position exeded total linked list size")
+                self.delete_tail()
+                return
+
+            if current_node.next_node is None:
+                # delete the tail if the current node has no next node  / (Current node IS the tail node)
+                # print("deleted the tail / no next node")
+                self.delete_tail()
+                return
+
+            if current_node.prev_node is None:
+                print("deleted head / current node does not have anything before it")
+                # self.delete_head()
+                return
+
+            print("current node is " + current_node.Title)
+            if current_node.next_node:
+                # print(current_node.next_node.next_node.Title)
+                current_node.next_node.delete()  # the position node 
+                nx = current_node.next_node.next_node
+                nx.prev_node = current_node
+                current_node.next_node = nx
+                nx.save()
+                current_node.save()
+
+                # current_node.next_node.next_node.save()
+
         self.save()
