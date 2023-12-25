@@ -51,7 +51,8 @@
                         <div class="play_options">
                             {% if node.prev_node %}
                             <div class="prev">
-                                <a style="text-decoration: none;color:white;" href="{% url 'view_node' node.prev_node.id %}">
+                                <a style="text-decoration: none;color:white;"
+                                    href="{% url 'view_node' node.prev_node.id %}">
                                     <!-- <p>previous: {{node.prev_node}}</p> -->
                                     <i class="fa-solid fa-backward"></i>
                                 </a>
@@ -62,7 +63,8 @@
                                 style="font-size: 16px;"></i>
                             {% if node.next_node %}
                             <div class="next">
-                                <a style="text-decoration: none;color:white;" href="{% url 'view_node' node.next_node.id %}">
+                                <a style="text-decoration: none;color:white;"
+                                    href="{% url 'view_node' node.next_node.id %}">
                                     <!-- <p>next : {{node.next_node}}</p> -->
                                     <i class="fa-solid fa-forward"></i>
                                 </a>
@@ -79,36 +81,7 @@
             </div>
         </div>
     </div>
-
-
-    <script>
-        var myAudio = document.getElementById("audio_file");
-        var isPlaying = false;
-
-        let play_btn = document.getElementById("play_btn")
-
-        function togglePlay() {
-            isPlaying ? myAudio.pause() : myAudio.play();
-        };
-
-        myAudio.onplaying = function () {
-            isPlaying = true;
-            play_btn.classList.remove("fa-play")
-            play_btn.classList.add("fa-pause")
-        };
-        myAudio.onpause = function () {
-            isPlaying = false;
-            play_btn.classList.remove("fa-pause")
-            play_btn.classList.add("fa-play")
-        };
-
-
-
-
-
-    </script>
-
-
+    <script src="{% static 'js/player.js' %}"></script>
 </body>
 
 </html>

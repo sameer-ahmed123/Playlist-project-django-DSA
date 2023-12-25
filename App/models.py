@@ -191,7 +191,6 @@ class LinkedList(models.Model):
         if (self.is_empty()):
             print("Linked list is empty!!")
         else:
-            print(str(position) + "the posittion in teermial")
             if (position == 1):
                 # delete the head if user wants to delete the first position node
                 self.delete_head()
@@ -216,15 +215,15 @@ class LinkedList(models.Model):
                 self.delete_tail()
                 return
 
-            if current_node.prev_node is None:
-                print("deleted head / current node does not have anything before it")
-                # self.delete_head()
-                return
+            # if current_node.prev_node is None:
+            #     print("deleted head / current node does not have anything before it")   # YEH KIU DALA THA IDHER ????
+            #     # self.delete_head()
+            #     return
 
             print("current node is " + current_node.Title)
             if current_node.next_node:
                 # print(current_node.next_node.next_node.Title)
-                current_node.next_node.delete()  # the position node 
+                current_node.next_node.delete()  # the position node
                 nx = current_node.next_node.next_node
                 nx.prev_node = current_node
                 current_node.next_node = nx
@@ -234,3 +233,6 @@ class LinkedList(models.Model):
                 # current_node.next_node.next_node.save()
 
         self.save()
+
+
+# make queue

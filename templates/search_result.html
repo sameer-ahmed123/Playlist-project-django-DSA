@@ -53,7 +53,7 @@
                             {% if search_result.prev_node %}
                             <div class="prev">
                                 <a href="{% url 'view_node' search_result.prev_node.id %}"
-                                style="text-decoration: none;color:white;">
+                                    style="text-decoration: none;color:white;">
                                     <!-- <p>previous: {{search_result.prev_node}}</p> -->
                                     <i class="fa-solid fa-backward"></i>
                                 </a>
@@ -82,36 +82,7 @@
             </div>
         </div>
     </div>
-
-
-    <script>
-        var myAudio = document.getElementById("audio_file");
-        var isPlaying = false;
-
-        let play_btn = document.getElementById("play_btn")
-
-        function togglePlay() {
-            isPlaying ? myAudio.pause() : myAudio.play();
-        };
-
-        myAudio.onplaying = function () {
-            isPlaying = true;
-            play_btn.classList.remove("fa-play")
-            play_btn.classList.add("fa-pause")
-        };
-        myAudio.onpause = function () {
-            isPlaying = false;
-            play_btn.classList.remove("fa-pause")
-            play_btn.classList.add("fa-play")
-        };
-
-
-
-
-
-    </script>
-
-
+    <script src="{% static 'js/player.js' %}"></script>
 </body>
 
 </html>
