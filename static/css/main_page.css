@@ -69,6 +69,8 @@ body {
 
 /* forms container */
 .addTO_forms_container {
+  margin-top: 200px;
+  margin-bottom: 150px;
   box-sizing: border-box;
   display: flex;
   height: 400px;
@@ -90,10 +92,34 @@ body {
 }
 
 .form {
+  height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+
+.form input {
+  padding: 5px 10px;
+  width: 80%;
+  font-size: 16px;
+  border-radius: 4px;
+}
+
+.form button[type="submit"] {
+  margin-top: 10px;
+  font-size: 18px;
+  background: #45a05aab;
+  color: #f1f1f1;
+  padding: 10px;
+  border-radius: 6px;
+  width: 85%;
+}
+
+.form button[type="submit"]:hover {
+  cursor: pointer;
+  transform: scale(1.05);
+  box-shadow: -1px -1px 25px rgba(124, 121, 121,0.4);
 }
 
 /* forms container end  */
@@ -134,19 +160,16 @@ body {
   transform: scale(1.05);
 }
 
-
-.delete_nth_form{
+.delete_nth_form {
   gap: 5px;
   height: 15px;
   /* padding:  20px; */
   display: flex;
   justify-content: center;
   align-items: center;
-
 }
 
-
-.delete_nth_form input[type="text"]{
+.delete_nth_form input[type="text"] {
   height: 35px;
   padding: 10px;
   border-radius: 4px;
@@ -154,7 +177,7 @@ body {
   box-sizing: border-box;
 }
 
-.delete_nth_btn{
+.delete_nth_btn {
   height: 35px;
   padding: 10px;
   color: #fdf0f1;
@@ -164,6 +187,5 @@ body {
   border: none;
   box-sizing: border-box;
 }
-
 
 /* delete option styling end  */
