@@ -19,6 +19,28 @@ def display_linked_list(request):
     return render(request, 'display_linked_list.html', {'nodes': nodes})
 
 
+def search_node(request):
+    if (request.method == "POST"):
+        search_item = request.POST.get("search_parameter")
+
+        linked_list = LinkedList.objects.first()
+        if linked_list is None:
+            linked_list = LinkedList()
+            linked_list.save()
+        search_result = linked_list.search_node(search_item)
+
+    return render(request, "search_result.html", {"search_result": search_result})
+
+
+def view_node(request, id):
+    node = get_object_or_404(Node, id=id)
+
+    context = {
+        "node": node
+    }
+    return render(request, "node_detail.html", context)
+
+
 def add_node_to_head(request):
     if request.method == 'POST':
         title = request.POST.get('title')
@@ -52,6 +74,23 @@ def add_node_to_tail(request):
     return redirect('display_linked_list')
 
 
+def add_to_nth(request):
+    if request.method == "POST":
+        Title = request.POST.get("nth_title")
+        Music_file = request.FILES.get("nth_music_file")
+        Author = request.POST.get("nth_author")
+        position = int(request.POST.get("nth_pos"))
+
+        linked_list = LinkedList.objects.first()
+        if linked_list is None:
+            linked_list = LinkedList()
+            linked_list.save()
+
+        linked_list.add_to_nth(Title, Music_file, Author, position)
+
+    return redirect("display_linked_list")
+
+
 def delete_head(request):
     linked_list = LinkedList.objects.first()
 
@@ -72,45 +111,6 @@ def delete_tail(request):
         linked_list.save()
 
     linked_list.delete_tail()
-
-    return redirect("display_linked_list")
-
-
-def search_node(request):
-    if (request.method == "POST"):
-        search_item = request.POST.get("search_parameter")
-
-        linked_list = LinkedList.objects.first()
-        if linked_list is None:
-            linked_list = LinkedList()
-            linked_list.save()
-        search_result = linked_list.search_node(search_item)
-
-    return render(request, "search_result.html", {"search_result": search_result})
-
-
-def view_node(request, id):
-    node = get_object_or_404(Node, id=id)
-
-    context = {
-        "node": node
-    }
-    return render(request, "node_detail.html", context)
-
-
-def add_to_nth(request):
-    if request.method == "POST":
-        Title = request.POST.get("nth_title")
-        Music_file = request.FILES.get("nth_music_file")
-        Author = request.POST.get("nth_author")
-        position = int(request.POST.get("nth_pos"))
-
-        linked_list = LinkedList.objects.first()
-        if linked_list is None:
-            linked_list = LinkedList()
-            linked_list.save()
-
-        linked_list.add_to_nth(Title, Music_file, Author, position)
 
     return redirect("display_linked_list")
 

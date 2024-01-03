@@ -114,12 +114,12 @@ class LinkedList(models.Model):
         if self.is_empty():
             print("the node list is empty")
         else:
-            prNode = self.tail.prev_node
+            previous_node = self.tail.prev_node
 
-            if prNode:
-                prNode.next_node.delete()
-                prNode.next_node = None
-                self.tail = prNode
+            if previous_node:
+                previous_node.next_node.delete()
+                previous_node.next_node = None
+                self.tail = previous_node
                 self.tail.save()
                 self.save()
             else:
