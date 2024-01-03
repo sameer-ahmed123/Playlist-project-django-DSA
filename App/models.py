@@ -11,8 +11,9 @@ class Node(models.Model):
     prev_node = models.OneToOneField(
         'self', null=True, blank=True, on_delete=models.SET_NULL, related_name="next_node_of", unique=False)
 
-    def __str__(self):
-        return f"{self.Title}"
+    # prev_node and next_node are the reference to the next and previous node in the linked list
+    # both are referncing 'self' which means
+    # next has a datatype of its self i.e next_node's datatype is Node
 
     def delete(self, *args, **kwargs):
         if self.Music_file:
@@ -21,6 +22,9 @@ class Node(models.Model):
             # to remove the music file from the device
 
         super(Node, self).delete(*args, **kwargs)
+
+    def __str__(self):
+        return f"{self.Title}"
 
 
 class LinkedList(models.Model):
@@ -93,8 +97,6 @@ class LinkedList(models.Model):
             print("the doubly linked list is empty ")
         else:
             nxNode = self.head.next_node  # nxNode is the node that comes after the current head
-            print(nxNode)
-
             if nxNode:
                 nxNode.prev_node.delete()  # delete the node that was before the nxNode (current head)
                 nxNode.prev_node = None
@@ -103,7 +105,6 @@ class LinkedList(models.Model):
                 self.save()  # save linked list only if multiple nodes are present in the linked list
 
             else:
-                print("single item in list , head and tail")
                 self.head.delete()
                 self = None
                 # set the linked list  itself to none without saving when only one item is in the list
@@ -205,24 +206,20 @@ class LinkedList(models.Model):
 
             if (position - 1 > current_position):
                 # delete tail if user wants to delete nth_item that is at a position greater then the size of linked list
-                # print("deleted tail / position exeded total linked list size")
                 self.delete_tail()
                 return
 
             if current_node.next_node is None:
                 # delete the tail if the current node has no next node  / (Current node IS the tail node)
-                # print("deleted the tail / no next node")
                 self.delete_tail()
                 return
 
             # if current_node.prev_node is None:
-            #     print("deleted head / current node does not have anything before it")   # YEH KIU DALA THA IDHER ????
             #     # self.delete_head()
             #     return
 
-            print("current node is " + current_node.Title)
             if current_node.next_node:
-                # print(current_node.next_node.next_node.Title)
+
                 current_node.next_node.delete()  # the position node
                 nx = current_node.next_node.next_node
                 nx.prev_node = current_node
